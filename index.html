@@ -1,24 +1,19 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"/>
 <title>websarasa.js</title>
-<script src="websarasa.js"></script>
-<script>"use strict";
-var main = function(scr) {
-	scr.loop = function(g, ts, dt, vw) {
-		// 背景
-		g.setColor(255, 255, 255); // R, G, B
-		g.fillRect(0, 0, 1000, 1000); // x, y, width, height
-		
-		// 赤い動く丸
-		var x = 500 + 80 + Math.sin(ts / 200) * 80;
-		var y = 500 - 50;
-		g.setColor(255, 0, 0); // R, G, B
-		g.fillCircle(x, y, 60); // x, y, r
-	};
-};
-</script>
+<style>
+body {
+	font-family: sans-serif;
+}
+</style>
 </head><body>
+<h1>websarasa.js</h1>
+<ul>
+<li><a href=simple.html>simple</a> by <a href=https://twitter.com/taisukef>@taisukef</a></li>
+<li><a href=goals17.html>goals17</a> by <a href=https://twitter.com/taisukef>@taisukef</a></li>
+</ul>
+<hr>
 <div id=credit>
-APP: <a href=http://fukuno.jig.jp/2310>JavaScriptで書く万華鏡 - websarasa.js 万華鏡コンテスト</a><br>
-LIB: <a href=https://github.io/taisukef/websarasa/>websarasa.js</a><br>
+SRC: <a href=https://taisukef.github.io/websarasa/>src on GitHub</a><br>
+BLOG: <a href=http://fukuno.jig.jp/2310>JavaScriptで書く万華鏡 - websarasa.js 万華鏡コンテスト</a><br>
 </div>
 </body>
