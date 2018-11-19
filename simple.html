@@ -1,0 +1,15 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/>
+<title>sample - websarasa.js</title>
+<script src="websarasa.js"></script>
+<script>"use strict";
+var main = function(scr) {
+//	scr.DEBUG = true;
+	scr.loop = function(g, ts, dt, vw) {
+		var x = 500 + 80 + Math.sin(ts / 200) * 80;
+		var y = 500 - 50;
+		g.setColor(255, 0, 0);
+		g.fillCircle(x, y, 60);
+	};
+};
+</script>
+</head></html>

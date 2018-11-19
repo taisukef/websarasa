@@ -1,0 +1,62 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/>
+<title>goals17 - websarasa.js</title>
+<script src="websarasa.js"></script>
+<script>"use strict";
+var main = function(scr) {
+	var COLORS = [
+		0xE5243B,
+		0xDDA63A,
+		0x4C9F38,
+		0xC5192D,
+		0xFF3A21,
+		0x26BDE2,
+		0xFCC30B,
+		0xA21942,
+		0xFD6925,
+		0xDD1367,
+		0xFD9D24,
+		0xBF8B2E,
+		0x3F7E44,
+		0x0A97D9,
+		0x56C02B,
+		0x00689D,
+		0x19486A,
+	];
+	var speed = 0;
+	var speed0 = 0;
+	var offx = 0;
+	
+	scr.DEBUG = false;
+	
+	scr.loop = function(g, ts, dt, vw) {
+		var ro = speed * 30;
+		var tho = -ts / 200;
+		var ox = 500 + Math.cos(tho) * ro + offx * 50;
+		var oy = 500 + Math.sin(tho) * ro;
+		for (var i = 0; i < COLORS.length; i++) {
+			var c = COLORS[i];
+			g.fillStyle = rgb2css(c >> 16, (c >> 8) & 0xff, c & 0xff);
+			g.beginPath();
+			var dth = Math.PI * 2 / COLORS.length;
+			var th = dth * i + (ts / (2000 >> speed0));
+			var r = 1000;
+			g.moveTo(ox, oy);
+			g.lineTo(ox + Math.cos(th) * r, oy + Math.sin(th) * r);
+			g.arc(ox, oy, r, th, th + dth, false);
+			g.fill();
+		}
+	};
+	scr.tap = function() {
+		speed = rnd(3);
+		speed0 = rnd(3);
+		offx = rnd(3);
+	};
+};
+</script>
+</head><body>
+<div id=credit>
+APP: <a href=http://fukuno.jig.jp/2310>JavaScriptで書く万華鏡 - websarasa.js 万華鏡コンテスト</a><br>
+LIB: <a href=https://github.io/taisukef/websarasa/>websarasa.js</a><br>
+</div>
+</body>
+</html>

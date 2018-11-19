@@ -1,0 +1,248 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/>
+<title>goals17</title>
+<script src="https://taisukef.github.io/sq-game/sq-game-r1.js"></script>
+<script>"use strict";
+var gamemain = function(game) {
+	var COLORS = [
+		0xE5243B,
+		0xDDA63A,
+		0x4C9F38,
+		0xC5192D,
+		0xFF3A21,
+		0x26BDE2,
+		0xFCC30B,
+		0xA21942,
+		0xFD6925,
+		0xDD1367,
+		0xFD9D24,
+		0xBF8B2E,
+		0x3F7E44,
+		0x0A97D9,
+		0x56C02B,
+		0x00689D,
+		0x19486A,
+	];
+	var speed = 0;
+	var speed0 = 0;
+	var offx = 0;
+	
+	var makeBuffer = function(w, h) {
+		var c = document.createElement("canvas");
+		c.width = w;
+		c.height = h;
+		return c;
+		// c.getContext("2d");
+	};
+	var css = function(c) {
+		var s = "000000" + c.toString(16);
+		return "#" + s.substring(s.length - 6);
+	};
+	
+	var buf = makeBuffer(1000, 1000);
+	var g = buf.getContext("2d");
+	
+	const DEBUG = false;
+	game.loop = function(g0, ts, dt, vw) {
+		if (DEBUG) {
+			g = g0;
+		}
+		
+		var ro = speed * 30;
+		var tho = -ts / 200;
+		var ox = 500 + Math.cos(tho) * ro + offx * 50;
+		var oy = 500 + Math.sin(tho) * ro;
+//		var speed0 = 0;
+		for (var i = 0; i < COLORS.length; i++) {
+			var c = COLORS[i];
+			g.fillStyle = css(c);
+			console.log(g.fillColor);
+			g.beginPath();
+			var dth = Math.PI * 2 / COLORS.length;
+			var th = dth * i + (ts / (2000 >> speed0));
+			var r = 1000;
+			g.moveTo(ox, oy);
+			g.lineTo(ox + Math.cos(th) * r, oy + Math.sin(th) * r);
+			g.arc(ox, oy, r, th, th + dth, false);
+			g.fill();
+		}
+		if (DEBUG)
+			return;
+		
+		var ox = 500;
+		var oy = 500;
+		var r = 200;
+		
+		var drawClipped = function() {
+			g0.beginPath();
+			var r1 = r + .5;
+			var th = -Math.PI / 2;
+			g0.moveTo(ox + Math.cos(th) * r1, oy + Math.sin(th) * r1);
+			th += Math.PI * 2 / 3;
+			g0.lineTo(ox + Math.cos(th) * r1, oy + Math.sin(th) * r1);
+			th += Math.PI * 2 / 3;
+			g0.lineTo(ox + Math.cos(th) * r1, oy + Math.sin(th) * r1);
+			g0.clip();
+			g0.drawImage(buf, 0, 0);
+		};
+		
+		var drawTriangles = function() {
+			// 1
+			g0.save();
+			drawClipped();
+			g0.restore();
+			
+			// 2
+			g0.save();
+			
+			g0.translate(1000, 0);
+			g0.scale(-1, 1);
+			
+			g0.translate(500, 500);
+			th = Math.PI / 3 * -1;
+			g0.rotate(th);
+			g0.translate(-500, -500);
+			
+			th = Math.PI / 6 * 1;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			
+			drawClipped();
+			g0.restore();
+			
+			// 3
+			g0.save();
+			
+			g0.translate(500, 500);
+			var thr = Math.PI / 3 * -2;
+			g0.rotate(thr);
+			g0.translate(-500, -500);
+			
+			th = Math.PI / 6 * 3 + thr;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * 1 + thr;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			
+			drawClipped();
+			g0.restore();
+	
+			// 4
+			g0.save();
+			
+			g0.translate(1000, 0);
+			g0.scale(-1, 1);
+			
+			g0.translate(500, 500);
+			var thr = Math.PI / 3 * -3;
+			g0.rotate(thr);
+			g0.translate(-500, -500);
+			
+			th = Math.PI / 6 * -1 - thr;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * 1 - thr;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * -1 - thr;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			
+			drawClipped();
+			g0.restore();
+			
+			// 5
+			g0.save();
+			
+			g0.translate(500, 500);
+			var thr = Math.PI / 3 * -4;
+			g0.rotate(thr);
+			g0.translate(-500, -500);
+			
+			th = Math.PI / 6 * -1 + thr;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * -3 + thr;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * -1 + thr;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * -3 + thr;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			
+			drawClipped();
+			g0.restore();
+			
+			// 6
+			g0.save();
+			
+			g0.translate(1000, 0);
+			g0.scale(-1, 1);
+			
+			g0.translate(500, 500);
+			var thr = Math.PI / 3 * -5;
+			g0.rotate(thr);
+			g0.translate(-500, -500);
+			
+			th = Math.PI / 6 * -1 - thr;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * 1 - thr;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * -1 - thr;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * 1 - thr;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * -1 - thr;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			
+			drawClipped();
+			g0.restore();
+			
+			// 7
+			g0.save();
+			
+			g0.translate(500, 500);
+			var thr = Math.PI / 3 * -6;
+			g0.rotate(thr);
+			g0.translate(-500, -500);
+			
+			th = Math.PI / 6 * 1 + thr + Math.PI;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * -1 + thr + Math.PI;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * 1 + thr + Math.PI;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * -1 + thr + Math.PI;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * 1 + thr + Math.PI;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			th = Math.PI / 6 * -1 + thr + Math.PI;
+			g0.translate(Math.cos(th) * r, Math.sin(th) * r);
+			
+			drawClipped();
+			g0.restore();
+		};
+		
+		//
+		g0.save();
+		g0.translate(520, -300);
+		drawTriangles();
+		g0.restore();
+		
+		g0.save();
+		g0.scale(1, -1);
+		g0.translate(520, -900);
+		drawTriangles();
+		g0.restore();
+		
+		g0.save();
+		g0.translate(520, -300 + 600);
+		drawTriangles();
+		g0.restore();
+		
+		g0.save();
+		g0.scale(1, -1);
+		g0.translate(520, -900 - 600);
+		drawTriangles();
+		g0.restore();
+	};
+	game.tap = function() {
+		speed = rnd(3);
+		speed0 = rnd(3);
+		offx = rnd(3);
+	};
+};
+</script>
+</head></html>
