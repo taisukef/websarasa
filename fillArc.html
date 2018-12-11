@@ -4,32 +4,28 @@
 <script>"use strict";
 var main = function(scr) {
 	scr.loop = function(g, ts, dt, vw) {
-		// 背景
-		g.setColor(255, 255, 255) // R, G, B
-		g.fillRect(0, 0, 1000, 1000) // x, y, width, height
-		
 		var speed = 60
-
 		var deg = ts / 1000 * speed % 360
 		// var deg = 120
 		// var deg = 240
 		// var deg = 0
+
+		g.setColor(255, 255, 255) // 背景 R, G, B
+		g.fillRect(0, 0, 1000, 1000) // x, y, width, height
 
 		g.setColor(250, 220, 0) // R, G, B
 		g.beginPath()
 		g.moveTo(500, 500)
 		g.arc(500, 500, 100, 0, Math.PI * 2 - deg / 360 * Math.PI * 2, true)
 		g.fill()
-		g.stroke()
 
 		if (deg == 0)
 			deg = 360
 		g.setColor(0, 0, 0)
 		var m = 10 * 10 * Math.PI * (deg / 360)
 		g.fillTextCenter("angle:" + fixfloat(deg, 1) + "° area:" + fixfloat(m, 0), 500, 500, 19)
-		
-	};
-};
+	}
+}
 </script>
 </head><body>
 <div id=credit>
