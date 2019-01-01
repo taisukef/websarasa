@@ -199,7 +199,7 @@ var ajax = function(url, callback) {
 	xhr.setRequestHeader("If-Modified-Since", "Thu, 01 Jun 1970 00:00:00 GMT");
 	xhr.send(data);
 };
-var xml2json = function(xml) { // attribute–³Ž‹A–¼‘Od‚È‚Á‚½‚ç”z—ñ‰»
+var xml2json = function(xml) { // attributeï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Oï¿½dï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½zï¿½ï¿½
 	var f = function(xml) {
 		var json = {};
 		var text = [];
@@ -412,6 +412,7 @@ var getContext = function(canvas, onlydraws) {
 	if (!onlydraws) {
 		g.canvas1 = canvas;
 		g.ratio = 1;
+		g.fontfamilyname = "sans-serif";
 		g.init = function() {
 			var ua = navigator.userAgent;
 	//		if (ua.indexOf("iPhone") >= 0 || ua.indexOf("iPad") >= 0 || ua.indexOf("iPod") >= 0)
@@ -455,10 +456,13 @@ var getContext = function(canvas, onlydraws) {
 		this.closePath();
 		this.fill();
 	};
+	g.setFontFamily = function(fontfamily) {
+		g.fontfamilyname = fontfamily;
+	};
 	g.fillTextCenter = function(s, x, y, fonth) {
 		if (!fonth)
 			fonth = 12;
-		g.font = "normal " + fonth + "px sans-serif";
+		g.font = "normal " + fonth + "px " + g.fontfamilyname;
 		var met = this.measureText(s);
 		var sw = met.width;
 		this.fillText(s, x - sw / 2, y + fonth / 2);
@@ -531,9 +535,11 @@ window.onload = function() {
 	
 	var g = getContext(canvas);
 	
+	/*
 	g.setFontSize = function(px) {
 		g.font = "normal " + px + "px monospace";
 	};
+	*/
 	
 	var tlast = 0;
 	var sw;

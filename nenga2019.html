@@ -1,0 +1,37 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/>
+<title>websarasa.js</title>
+<style type="text/css">
+@font-face {
+	font-family: "ichigojam";
+	src: url("IchigoJam-1.2.woff") format('woff');
+}
+</style>
+<xscript src="https://taisukef.github.io/websarasa/websarasa.js"></xscript>
+<script src="websarasa.js"></script>
+<script>"use strict"
+var main = function(scr) {
+	var w = 5500
+	var x = w
+	var y = 500 - 35 // + rnd(100)
+	scr.loop = function(g, ts, dt, vw) {
+		// 背景
+		g.setColor(230, 3, 30) // R, G, B
+		g.fillRect(0, 0, 1000, 1000) // x, y, width, height
+		
+		// 白字
+		g.setColor(255, 255, 255) // R, G, B
+		g.setFontFamily("ichigojam")
+		g.fillTextCenter("HAPPY NEW YEAR! 2019 アケマシテオメデトウゴザイマス", x, y, 240) // x, y, r
+
+		x -= dt / 4
+		if (x < -w)
+			x = w
+	}
+}
+</script>
+</head><body>
+<div id=credit>
+APP: <a href=https://fukuno.jig.jp/2354>HAPPY NEW YEAR 2019</a> CC BY <a href=https://twitter.com/taisukef>@taisukef</a><br>
+LIB: <a href=https://taisukef.github.io/websarasa/>websarasa.js</a><br>
+</div>
+</body>
