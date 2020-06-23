@@ -1,0 +1,33 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/>
+<title>websarasa.js</title>
+<script src="https://taisukef.github.io/websarasa/websarasa.js"></script>
+<script>"use strict";
+var main = function(scr) {
+	let t = 0;
+	scr.loop = function(g, ts, dt, vw) {
+		// 背景
+		g.setColor(0, 0, 0);
+		g.fillRect(0, 0, 1000, 1000); // x, y, width, height
+		
+		g.setColor(255, 255, 255); // R, G, B
+		const f = (x, y, r, d) => {
+			if (d > 3) {
+				g.drawLine(x, y, x += Math.cos(r) * d, y -= Math.sin(r) * d);
+				f(x, y, r + y / 99 + t, d / 1.5);
+				f(x, y, r - y / 99 - t, d / 1.5);
+			}
+		}
+		for (let r = 0; r < 6; r += Math.PI / 4) {
+			f(500, 500, r, 120);
+		}
+		t += .003;
+	};
+};
+</script>
+</head><body>
+<div id=credit>
+APP: <a href=http://fukuno.jig.jp/2310>websarasa</a> CC BY <a href=https://twitter.com/taisukef>@taisukef</a><br>
+Base App: <a href=https://twitter.com/Hau_kun/status/1275084507473985539>@Hau_kun - Twitter</a><br>
+LIB: <a href=https://taisukef.github.io/websarasa/>websarasa.js</a><br>
+</div>
+</body>
